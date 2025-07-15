@@ -31,7 +31,7 @@ services:
       - "8546:8546"
     volumes:
       - "${PWD}/nodeConfig.json:/config/nodeConfig.json"
-      - "${PWD}/l2_data:/home/user/.arbitrum"
+      - l2_data:/home/user/.arbitrum
     entrypoint:
       - "/usr/local/bin/nitro"
       - --conf.file=/config/nodeConfig.json

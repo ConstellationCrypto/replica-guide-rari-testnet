@@ -1,9 +1,5 @@
 # RARI Testnet Replica Guide
 
-tldr
-1. Check vars you need to set in `docker-compose.yml`. Example: `API_KEY_ALCHEMY`
-2. Run `docker-compose up`.
-
 ## Architecture Overview
 
 - l2: this service is the nitro node
