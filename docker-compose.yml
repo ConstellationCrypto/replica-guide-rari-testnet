@@ -4,21 +4,38 @@ volumes:
   l2_data:
 
 services:
-  l2:
-    image: public.ecr.aws/i6b2w2n6/nitro-node:v3.2.1-d81324d
+  celestia-das-server:
     platform: linux/amd64
+    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.4.0
+    ports:
+      - "9876:9876"
+    entrypoint:
+      - "bin/celestia-server"
+      - --log-level=5
+      - --metrics
+      - --enable-rpc=true
+      - --rpc-addr=0.0.0.0
+      - --rpc-port=9876
+      - --celestia.keyname=${CELESTIA_KEYNAME}
+      - --celestia.auth-token=${CELESTIA_LIGHT_NODE_AUTH_TOKEN}
+      - --celestia.namespace-id=ca1de12a12528b03789c
+      - --celestia.rpc=${CELESTIA_LIGHT_NODE}
+      - --celestia.validator-config.blobstream=0xA83ca7775Bc2889825BcDeDfFa5b758cf69e8794
+      - --celestia.validator-config.eth-rpc=https://arb-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}
+
+  l2:
+    platform: linux/amd64
+    image: ghcr.io/celestiaorg/nitro:v3.5.2
     ports:
       - "8545:8545"
       - "8546:8546"
     volumes:
       - "${PWD}/nodeConfig.json:/config/nodeConfig.json"
-      - l2_data:/home/user/.arbitrum
+      - "${PWD}/l2_data:/home/user/.arbitrum"
     entrypoint:
       - "/usr/local/bin/nitro"
       - --conf.file=/config/nodeConfig.json
-      - --node.staker.enable
-      - --node.staker.strategy=Watchtower
       - --execution.forwarding-target=wss://rari-testnet.calderachain.xyz/ws
-      - --node.feed.input.url=wss://rari-testnet.calderachain.xyz/feed      
+      - --node.feed.input.url=wss://rari-testnet.calderachain.xyz/feed
       - --node.data-availability.rest-aggregator.urls="https://rari-testnet.calderachain.xyz/rest-aggregator"
       - --parent-chain.connection.url=
