@@ -38,3 +38,6 @@ curl -X POST \\
   http://localhost:8545
 
 ```
+
+## Snapshot
+https://caldera-chain-data-snapshots.s3.us-west-2.amazonaws.com/exported-snapshots/nitro-rari-testnet/nitro-rari-testnet-2025-Jul-14.tgz
