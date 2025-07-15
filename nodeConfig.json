@@ -1,0 +1,60 @@
+{
+	"metrics-server": { "port": 6070, "addr": "0.0.0.0" },
+	"chain": {
+		"info-json": "[{\"chain-id\":1918988905,\"parent-chain-id\":421614,\"chain-name\":\"rari-testnet\",\"chain-config\":{\"chainId\":1918988905,\"homesteadBlock\":0,\"daoForkBlock\":null,\"daoForkSupport\":true,\"eip150Block\":0,\"eip150Hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"eip155Block\":0,\"eip158Block\":0,\"byzantiumBlock\":0,\"constantinopleBlock\":0,\"petersburgBlock\":0,\"istanbulBlock\":0,\"muirGlacierBlock\":0,\"berlinBlock\":0,\"londonBlock\":0,\"clique\":{\"period\":0,\"epoch\":0},\"arbitrum\":{\"EnableArbOS\":true,\"AllowDebugPrecompiles\":false,\"DataAvailabilityCommittee\":true,\"InitialArbOSVersion\":10,\"InitialChainOwner\":\"0x46c7cbced66dd5eb31e5a31fef689090d9db8d66\",\"GenesisBlockNum\":0}},\"rollup\":{\"bridge\":\"0x55f0a866E9A5B59Eab0269D62d121BC0978a4346\",\"inbox\":\"0xb6534cB24b925b58dfD811a0090f24C7aD52cA78\",\"sequencer-inbox\":\"0xf0d96B3a783F04620D5CBbf2829E70CEe396403F\",\"rollup\":\"0x2EeDc7b995267aa1060587Ff2585690C204E7e5c\",\"validator-utils\":\"0x2dAb9011cf19573772F92dfa65c275d679ae9cc8\",\"validator-wallet-creator\":\"0xe911FadA3EE53dCCe71102b4570e68deBd760F89\",\"deployed-at\":1640371}}]",
+		"name": "rari-testnet"
+	},
+	"parent-chain": { "connection": { "url": "http://l1-proxy:8080" } },
+	"http": {
+		"addr": "0.0.0.0",
+		"port": 8545,
+		"vhosts": "*",
+		"corsdomain": "*",
+		"api": ["eth", "net", "web3", "arb", "debug", "txpool"]
+	},
+	"ws": {
+		"addr": "0.0.0.0",
+		"port": 8546,
+		"api": ["eth", "net", "web3", "arb", "debug", "txpool"]
+	},
+	"node": {
+		"feed": { "output": { "enable": false, "port": 9642 } },
+		"sequencer": false,
+		"delayed-sequencer": { "enable": false },
+		"batch-poster": {
+			"max-size": 90000,
+			"enable": false,
+			"parent-chain-wallet": {}
+		},
+		"staker": {
+			"enable": false,
+			"strategy": "MakeNodes",
+			"parent-chain-wallet": {}
+		},
+		"dangerous": { "no-sequencer-coordinator": true },
+		"data-availability": {
+			"enable": true,
+			"sequencer-inbox-address": "0xf0d96B3a783F04620D5CBbf2829E70CEe396403F",
+			"parent-chain-node-url": "http://l1-proxy:8080",
+			"rest-aggregator": { "enable": true, "urls": "http://das-server:9877" },
+			"rpc-aggregator": {
+				"enable": false,
+				"assumed-honest": 1,
+				"backends": "[{\"url\":\"http://das-server:9876\",\"pubkey\":\"YAkd2guI6sQR485vaABPCKYm02vpd7yiA+4RLzSTrHrpegs/+nJHe0Or89e3sV9wUQ+thZryd2TJni1Oms6iy5/XVEoDNEtyUJAVe/y24P6hyGgpfavbXfLNFLydfqIFBBNrh6Nem+pcGUf3NPC2XgcGekVEVaCc9SNr51+1J/m3PQRPWFUl8xQ9IMNan4YtnBb0bxFmSfBYIou+5XOMUxv32r97vzINX7qx7DRstldR5rJstk6fOIpmE7sq7jxzaBmtdePZVsFR58EcJZhe8I3noGghfEcRX75Gra54tF/0RM0pX7riZi1jYBSJXrUwMhXONzPWjspUbChsBHKwQyLy7bSFNr6Ts2OOZix4vVpzmyQOeep0ItlVtFVuwjULrw==\",\"signermask\":1}]"
+			}
+		},
+		"celestia-cfg": {
+			"enable": true,
+			"url": "http://celestia-das-server:9876"
+		},
+		"da-preference": ["celestia", "anytrust"]
+	},
+	"execution": {
+		"caching": { "archive": true },
+		"sequencer": {
+			"max-tx-data-size": 85000,
+			"enable": false,
+			"max-block-speed": "250ms"
+		}
+	}
+}
