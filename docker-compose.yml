@@ -18,9 +18,9 @@ services:
       - --rpc-port=9876
       - --celestia.keyname=${CELESTIA_KEYNAME}
       - --celestia.auth-token=${CELESTIA_LIGHT_NODE_AUTH_TOKEN}
-      - --celestia.namespace-id=ca1de12a12528b03789c
+      - --celestia.namespace-id=ca1de12a9905be97beaf
       - --celestia.rpc=${CELESTIA_LIGHT_NODE}
-      - --celestia.validator-config.blobstream=0xA83ca7775Bc2889825BcDeDfFa5b758cf69e8794
+      - --celestia.validator-config.blobstream=0xc3e209eb245Fd59c8586777b499d6A665DF3ABD2
       - --celestia.validator-config.eth-rpc=https://arb-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}
 
   l2:
